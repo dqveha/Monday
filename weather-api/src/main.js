@@ -3,6 +3,15 @@ import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/styles.css';
 
+//Biz Logic
+const convertKtoF = (temp) => {
+  return ((temp - 273.15) * 9/5 + 32).toFixed(2);
+}
+
+
+
+//UI Logic
+
 $(document).ready(function() {
   $('#weatherLocation').click(function() {
     const city = $('#location').val();
@@ -23,7 +32,10 @@ $(document).ready(function() {
 
     function getElements(response) {
       $('.showHumidity').text(`The humidity in ${city} is ${response.main.humidity}%`);
-      $('.showTemp').text(`The temperature in Kelvins is ${response.main.temp} degrees.`);
+      $('.showTemp').text(`The temperature in Kelvins is ${response.main.temp}`); 
+      $('.avgTemp').text(`The temperature in Fahrenheit is ${convertKtoF(response.main.temp)} degrees.`);
+      $('#min').text(`The minimum temperature in Fahrenheit is ${convertKtoF(response.main.temp_min)} degrees.`);
+      $('#max').text(`The maximum temperature in Fahrenheit is ${convertKtoF(response.main.temp_max)} degrees.`);
     }
   });
 });
